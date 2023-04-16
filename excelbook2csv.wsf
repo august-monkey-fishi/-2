@@ -1,0 +1,36 @@
+<job>
+<script language="vbscript">
+
+    Function SetFileName()
+        SetFileName = InputBox("ファイル名を入力してください")
+    End Function
+
+    Function SepareteFolderPath(FullPath) 
+        Dim LastPos
+        LastPos = InStrRev(FullPath, "\") 
+        SepareteFolderPath = Left(FullPath, LastPos)
+    End Function
+
+</script>
+<script language="JScript">
+
+    var path = SetFileName();
+    if(typeof(path) == "undefined"){
+        WScript.Echo("ファイル名が入力されていません");
+        WScript.Quit();
+    }
+
+    var FilePath = SepareteFolderPath(path)
+    var Excel = new ActiveXObject("Excel.Application");
+    Excel.Visible = false;
+    var book = Excel.Workbooks.Open(path);
+    for (var i = 1; i <= book.Sheets.Count; i++) {
+        var sheet = book.Sheets(i);
+        sheet.SaveAs(FilePath + sheet.Name + ".csv", 6);
+    }
+    book.Close(false);
+    Excel.Quit();
+    WScript.Quit();
+
+</script>
+</job>
