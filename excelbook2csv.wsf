@@ -16,7 +16,7 @@
 
     var path = SetFileName();
     if(typeof(path) == "undefined"){
-        WScript.Echo("ファイル名が入力されていません");
+        WScript.Echo("ファイル名が入力されていません.再度確認してください");
         WScript.Quit();
     }
 
